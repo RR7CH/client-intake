@@ -3,252 +3,411 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Client Intake Funnel</title>
+    <title>Professional Client Intake Funnel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .step-transition { transition: all 0.3s ease-in-out; }
         .card-selected { border-color: #3b82f6; background-color: #eff6ff; }
         .progress-bar { transition: width 0.5s ease-in-out; }
+        input:focus, textarea:focus, select:focus { border-color: #3b82f6; ring: 2px; ring-color: #3b82f6; outline: none; }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen font-sans text-gray-900">
+<body class="bg-gray-50 min-h-screen font-sans text-gray-900 pb-20">
 
-    <div id="app" class="max-w-2xl mx-auto px-4 py-12">
+    <div id="app" class="max-w-3xl mx-auto px-4 py-8">
         <!-- Progress Header -->
-        <div class="mb-8">
+        <div class="mb-6 sticky top-0 bg-gray-50 pt-4 z-10">
             <div class="flex justify-between items-center mb-2">
-                <h1 class="text-xl font-bold text-gray-800">Client Onboarding</h1>
-                <span id="progress-text" class="text-sm font-medium text-gray-500">Step 1 of 8</span>
+                <h1 class="text-xl font-bold text-gray-800">Project Intake</h1>
+                <span id="progress-text" class="text-sm font-medium text-gray-500">Step 1 of 13</span>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full progress-bar" style="width: 12.5%"></div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="bg-blue-600 h-2 rounded-full progress-bar" style="width: 7.7%"></div>
             </div>
         </div>
 
         <!-- Form Container -->
-        <div id="steps-container" class="bg-white rounded-2xl shadow-xl p-8 min-h-[500px] flex flex-col">
+        <div id="steps-container" class="bg-white rounded-2xl shadow-xl p-6 md:p-10 min-h-[600px] flex flex-col">
             
             <!-- Step 1: Basics -->
             <div id="step-1" class="step-content">
                 <h2 class="text-2xl font-bold mb-2">Let's start with the basics</h2>
-                <p class="text-gray-500 mb-8">Tell us who you are and what your business is called.</p>
-                
-                <div class="space-y-6">
+                <p class="text-gray-500 mb-8">Who are we working with?</p>
+                <div class="space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold mb-2">Your Name</label>
-                            <input type="text" id="client-name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. John Doe">
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Business Name</label>
+                            <input type="text" id="business-name" class="w-full p-3 border rounded-lg" placeholder="e.g. Blue Sky Detailing">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold mb-2">Email Address</label>
-                            <input type="email" id="client-email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. john@example.com">
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Owner / Contact Name</label>
+                            <input type="text" id="client-name" class="w-full p-3 border rounded-lg" placeholder="e.g. John Doe">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">Business Name</label>
-                        <input type="text" id="business-name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. Blue Sky Auto Repair">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">Business Type / Industry</label>
-                        <input type="text" id="business-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. Landscaping, E-commerce, Legal">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Email Address</label>
+                            <input type="email" id="client-email" class="w-full p-3 border rounded-lg" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Phone Number</label>
+                            <input type="tel" id="client-phone" class="w-full p-3 border rounded-lg" placeholder="(555) 000-0000">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 2: Primary Goals -->
+            <!-- Step 2: Location & Hours -->
             <div id="step-2" class="step-content hidden">
-                <h2 class="text-2xl font-bold mb-2">What do you need help with?</h2>
-                <p class="text-gray-500 mb-8">Select all that apply. We'll only ask follow-up questions for your choices.</p>
-                
-                <div class="grid grid-cols-1 gap-4">
-                    <button onclick="toggleSelection(this, 'goal-website')" class="p-4 border-2 rounded-xl text-left hover:border-blue-500 transition-all flex items-center justify-between group">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center"><i class="fa-solid fa-globe"></i></div>
-                            <div>
-                                <span class="block font-bold">New Website / Redesign</span>
-                                <span class="text-sm text-gray-500">Professional presence for your brand.</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-check text-blue-600 opacity-0 group-[.card-selected]:opacity-100"></i>
-                    </button>
-                    <button onclick="toggleSelection(this, 'goal-social')" class="p-4 border-2 rounded-xl text-left hover:border-blue-500 transition-all flex items-center justify-between group">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-lg flex items-center justify-center"><i class="fa-solid fa-share-nodes"></i></div>
-                            <div>
-                                <span class="block font-bold">Social Media Presence</span>
-                                <span class="text-sm text-gray-500">Instagram, Facebook, TikTok setup.</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-check text-blue-600 opacity-0 group-[.card-selected]:opacity-100"></i>
-                    </button>
-                    <button onclick="toggleSelection(this, 'goal-ads')" class="p-4 border-2 rounded-xl text-left hover:border-blue-500 transition-all flex items-center justify-between group">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center"><i class="fa-solid fa-bullhorn"></i></div>
-                            <div>
-                                <span class="block font-bold">Paid Advertising</span>
-                                <span class="text-sm text-gray-500">Google Ads, Facebook Ads, etc.</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-check text-blue-600 opacity-0 group-[.card-selected]:opacity-100"></i>
-                    </button>
+                <h2 class="text-2xl font-bold mb-2">Location & Operations</h2>
+                <p class="text-gray-500 mb-8">Where and when do you operate?</p>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Business Address</label>
+                        <input type="text" id="business-address" class="w-full p-3 border rounded-lg" placeholder="Full address or 'Mobile Only'">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Service Area / Delivery Area</label>
+                        <input type="text" id="service-area" class="w-full p-3 border rounded-lg" placeholder="e.g. All of Atlanta, GA">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Business Hours</label>
+                        <textarea id="business-hours" class="w-full p-3 border rounded-lg h-24" placeholder="e.g. Mon-Fri: 9am-6pm, Sat: 10am-4pm"></textarea>
+                    </div>
                 </div>
             </div>
 
-            <!-- Step 3: Website Specifics (Conditional) -->
+            <!-- Step 3: Existing Presence -->
             <div id="step-3" class="step-content hidden">
-                <h2 class="text-2xl font-bold mb-2">Website Details</h2>
-                <p class="text-gray-500 mb-8">What should your website focus on?</p>
-                
-                <div class="space-y-6">
-                    <div class="grid grid-cols-2 gap-4">
-                        <button onclick="setRadioSelection(this, 'web-type')" class="p-4 border-2 rounded-xl text-center hover:border-blue-500 transition-all font-semibold">One-Page</button>
-                        <button onclick="setRadioSelection(this, 'web-type')" class="p-4 border-2 rounded-xl text-center hover:border-blue-500 transition-all font-semibold">Multi-Page</button>
-                        <button onclick="setRadioSelection(this, 'web-type')" class="p-4 border-2 rounded-xl text-center hover:border-blue-500 transition-all font-semibold">E-Commerce</button>
-                        <button onclick="setRadioSelection(this, 'web-type')" class="p-4 border-2 rounded-xl text-center hover:border-blue-500 transition-all font-semibold">Booking Site</button>
+                <h2 class="text-2xl font-bold mb-2">Current Online Presence</h2>
+                <p class="text-gray-500 mb-8">Where can we find you online right now?</p>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Current Website URL (If any)</label>
+                        <input type="url" id="website-url" class="w-full p-3 border rounded-lg" placeholder="https://">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold mb-3">Key Features Needed</label>
-                        <div class="flex flex-wrap gap-2">
-                            <button onclick="toggleSelection(this, 'web-feature')" class="px-4 py-2 border rounded-full text-sm hover:border-blue-500 transition-all">Contact Form</button>
-                            <button onclick="toggleSelection(this, 'web-feature')" class="px-4 py-2 border rounded-full text-sm hover:border-blue-500 transition-all">Online Booking</button>
-                            <button onclick="toggleSelection(this, 'web-feature')" class="px-4 py-2 border rounded-full text-sm hover:border-blue-500 transition-all">Photo Gallery</button>
-                            <button onclick="toggleSelection(this, 'web-feature')" class="px-4 py-2 border rounded-full text-sm hover:border-blue-500 transition-all">Customer Reviews</button>
-                            <button onclick="toggleSelection(this, 'web-feature')" class="px-4 py-2 border rounded-full text-sm hover:border-blue-500 transition-all">Live Chat</button>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Social Media Links</label>
+                        <textarea id="social-links" class="w-full p-3 border rounded-lg h-20" placeholder="Facebook, Instagram, TikTok links..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Google Business Profile Link</label>
+                        <input type="url" id="google-profile" class="w-full p-3 border rounded-lg" placeholder="Link to your Google review page">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Business Deep Dive -->
+            <div id="step-4" class="step-content hidden">
+                <h2 class="text-2xl font-bold mb-2">Tell us about the business</h2>
+                <p class="text-gray-500 mb-8">Help us understand what you do and who you serve.</p>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Business Category</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                            <button onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Barber Shop</button>
+                            <button onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Clothing Brand</button>
+                            <button onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Auto Shop</button>
+                            <button onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Detailing Service</button>
+                        </div>
+                        <input type="text" id="business-category-other" class="w-full mt-2 p-3 border rounded-lg text-sm" placeholder="Other category...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Top 3 Most Important Services/Products</label>
+                        <input type="text" id="top-services" class="w-full p-3 border rounded-lg" placeholder="e.g. Ceramic Coating, Full Detail, Interior cleaning">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">What makes you different from competitors?</label>
+                        <textarea id="usp" class="w-full p-3 border rounded-lg h-20" placeholder="Your unique selling points..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Who is your ideal customer?</label>
+                        <input type="text" id="ideal-customer" class="w-full p-3 border rounded-lg" placeholder="e.g. Luxury car owners, busy professionals">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">How do you work?</label>
+                        <div class="flex gap-4">
+                            <button onclick="setRadioSelection(this, 'work-mode')" class="flex-1 p-3 border rounded-lg font-semibold hover:border-blue-500">Local Only</button>
+                            <button onclick="setRadioSelection(this, 'work-mode')" class="flex-1 p-3 border rounded-lg font-semibold hover:border-blue-500">Online Only</button>
+                            <button onclick="setRadioSelection(this, 'work-mode')" class="flex-1 p-3 border rounded-lg font-semibold hover:border-blue-500">Both</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 4: Social Media Specifics (Conditional) -->
-            <div id="step-4" class="step-content hidden">
-                <h2 class="text-2xl font-bold mb-2">Social Media Channels</h2>
-                <p class="text-gray-500 mb-8">Which platforms should we build on?</p>
-                
-                <div class="grid grid-cols-2 gap-4 mb-8">
-                    <button onclick="toggleSelection(this, 'social-platform')" class="p-4 border-2 rounded-xl flex items-center gap-3 hover:border-blue-500 transition-all font-semibold">
-                        <i class="fa-brands fa-facebook text-blue-600"></i> Facebook
+            <!-- Step 5: Primary Goals -->
+            <div id="step-5" class="step-content hidden">
+                <h2 class="text-2xl font-bold mb-2">What are your primary goals?</h2>
+                <p class="text-gray-500 mb-8">Select everything you want to achieve.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                        <span class="font-bold">Get more leads</span>
+                        <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
                     </button>
-                    <button onclick="toggleSelection(this, 'social-platform')" class="p-4 border-2 rounded-xl flex items-center gap-3 hover:border-blue-500 transition-all font-semibold">
-                        <i class="fa-brands fa-instagram text-pink-600"></i> Instagram
+                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                        <span class="font-bold">Get more bookings</span>
+                        <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
                     </button>
-                    <button onclick="toggleSelection(this, 'social-platform')" class="p-4 border-2 rounded-xl flex items-center gap-3 hover:border-blue-500 transition-all font-semibold">
-                        <i class="fa-brands fa-tiktok text-black"></i> TikTok
+                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                        <span class="font-bold">Sell products online</span>
+                        <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
                     </button>
-                    <button onclick="toggleSelection(this, 'social-platform')" class="p-4 border-2 rounded-xl flex items-center gap-3 hover:border-blue-500 transition-all font-semibold">
-                        <i class="fa-brands fa-youtube text-red-600"></i> YouTube
+                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                        <span class="font-bold">Set up social media</span>
+                        <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
+                    </button>
+                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                        <span class="font-bold">Launch Google Ads</span>
+                        <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
+                    </button>
+                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                        <span class="font-bold">Create new website</span>
+                        <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
                     </button>
                 </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-3">Service Level</label>
-                    <div class="grid grid-cols-1 gap-2">
-                        <button onclick="setRadioSelection(this, 'social-service')" class="p-3 border-2 rounded-lg text-left text-sm hover:border-blue-500 transition-all">Just setup the accounts & bios</button>
-                        <button onclick="setRadioSelection(this, 'social-service')" class="p-3 border-2 rounded-lg text-left text-sm hover:border-blue-500 transition-all">Setup + Content Creation</button>
-                        <button onclick="setRadioSelection(this, 'social-service')" class="p-3 border-2 rounded-lg text-left text-sm hover:border-blue-500 transition-all">Full monthly management</button>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">What does success look like in 90 days?</label>
+                        <textarea id="goal-success" class="w-full p-3 border rounded-lg h-20" placeholder="e.g. 20 new weekly bookings, 500 followers..."></textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 5: Paid Ads Specifics (Conditional) -->
-            <div id="step-5" class="step-content hidden">
-                <h2 class="text-2xl font-bold mb-2">Paid Advertising</h2>
-                <p class="text-gray-500 mb-8">Where do you want to run ads?</p>
-                
+            <!-- Step 6: Website Needs (Conditional) -->
+            <div id="step-6" class="step-content hidden">
+                <h2 class="text-2xl font-bold mb-2">Website Specifics</h2>
+                <p class="text-gray-500 mb-8">Define your vision for the site.</p>
                 <div class="space-y-6">
-                    <div class="grid grid-cols-2 gap-4">
-                        <button onclick="toggleSelection(this, 'ad-platform')" class="p-4 border-2 rounded-xl flex items-center gap-3 hover:border-blue-500 transition-all font-semibold">
-                            <i class="fa-brands fa-google text-yellow-500"></i> Google Ads
-                        </button>
-                        <button onclick="toggleSelection(this, 'ad-platform')" class="p-4 border-2 rounded-xl flex items-center gap-3 hover:border-blue-500 transition-all font-semibold">
-                            <i class="fa-brands fa-meta text-blue-500"></i> Facebook/Meta
-                        </button>
-                        <button onclick="toggleSelection(this, 'ad-platform')" class="p-4 border-2 rounded-xl flex items-center gap-3 hover:border-blue-500 transition-all font-semibold">
-                            <i class="fa-brands fa-tiktok text-black"></i> TikTok Ads
-                        </button>
-                        <button onclick="toggleSelection(this, 'ad-platform')" class="p-4 border-2 rounded-xl flex items-center gap-3 hover:border-blue-500 transition-all font-semibold">
-                            <i class="fa-solid fa-map-location-dot text-green-500"></i> Local Service Ads
-                        </button>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Website Type</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                            <button onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">One-Page</button>
+                            <button onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Multi-Page</button>
+                            <button onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">E-Commerce</button>
+                            <button onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Booking Focus</button>
+                            <button onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Portfolio</button>
+                        </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Monthly Budget (Estimated)</label>
-                        <select id="ad-budget" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="under-500">Under $500</option>
-                            <option value="500-1500">$500 - $1,500</option>
-                            <option value="1500-5000">$1,500 - $5,000</option>
-                            <option value="over-5000">$5,000+</option>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Pages Needed</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Home</button>
+                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">About</button>
+                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Services</button>
+                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Products</button>
+                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Gallery</button>
+                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Reviews</button>
+                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Contact</button>
+                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">FAQ</button>
+                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Blog</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Features (Booking, Payments, Slider, etc.)</label>
+                        <input type="text" id="web-features" class="w-full p-3 border rounded-lg" placeholder="List specific features you need...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Tone of the Brand</label>
+                        <select id="web-tone" class="w-full p-3 border rounded-lg bg-white">
+                            <option value="professional">Professional</option>
+                            <option value="luxury">Luxury</option>
+                            <option value="modern">Modern</option>
+                            <option value="bold">Bold</option>
+                            <option value="friendly">Friendly</option>
+                            <option value="trendy">Trendy</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 6: Brand & Style -->
-            <div id="step-6" class="step-content hidden">
-                <h2 class="text-2xl font-bold mb-2">Brand Vibe & Style</h2>
-                <p class="text-gray-500 mb-8">Help us understand the "look and feel" you want.</p>
-                
-                <div class="grid grid-cols-3 gap-3 mb-8">
-                    <button onclick="toggleSelection(this, 'brand-style')" class="p-3 border-2 rounded-xl text-sm font-bold hover:border-blue-500 transition-all">Luxury</button>
-                    <button onclick="toggleSelection(this, 'brand-style')" class="p-3 border-2 rounded-xl text-sm font-bold hover:border-blue-500 transition-all">Modern</button>
-                    <button onclick="toggleSelection(this, 'brand-style')" class="p-3 border-2 rounded-xl text-sm font-bold hover:border-blue-500 transition-all">Bold</button>
-                    <button onclick="toggleSelection(this, 'brand-style')" class="p-3 border-2 rounded-xl text-sm font-bold hover:border-blue-500 transition-all">Clean</button>
-                    <button onclick="toggleSelection(this, 'brand-style')" class="p-3 border-2 rounded-xl text-sm font-bold hover:border-blue-500 transition-all">Friendly</button>
-                    <button onclick="toggleSelection(this, 'brand-style')" class="p-3 border-2 rounded-xl text-sm font-bold hover:border-blue-500 transition-all">Vintage</button>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-2">Colors or Examples (Optional)</label>
-                    <textarea id="brand-notes" class="w-full p-3 border border-gray-300 rounded-lg h-24 outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g. Blue and White colors, like apple.com..."></textarea>
-                </div>
-            </div>
-
-            <!-- Step 7: Assets & Access -->
+            <!-- Step 7: Social Media Deep Dive (Conditional) -->
             <div id="step-7" class="step-content hidden">
-                <h2 class="text-2xl font-bold mb-2">What do you have ready?</h2>
-                <p class="text-gray-500 mb-8">Click what you can provide now.</p>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <button onclick="toggleSelection(this, 'asset')" class="p-4 border-2 rounded-xl text-left hover:border-blue-500 transition-all font-semibold">
-                        <i class="fa-solid fa-image mr-2 text-blue-500"></i> Logo Files
-                    </button>
-                    <button onclick="toggleSelection(this, 'asset')" class="p-4 border-2 rounded-xl text-left hover:border-blue-500 transition-all font-semibold">
-                        <i class="fa-solid fa-camera mr-2 text-green-500"></i> Photos/Videos
-                    </button>
-                    <button onclick="toggleSelection(this, 'asset')" class="p-4 border-2 rounded-xl text-left hover:border-blue-500 transition-all font-semibold">
-                        <i class="fa-solid fa-key mr-2 text-yellow-500"></i> Domain Access
-                    </button>
-                    <button onclick="toggleSelection(this, 'asset')" class="p-4 border-2 rounded-xl text-left hover:border-blue-500 transition-all font-semibold">
-                        <i class="fa-solid fa-list-check mr-2 text-purple-500"></i> Service/Price List
-                    </button>
-                </div>
-                <div class="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200 text-sm text-yellow-800 italic text-center">
-                    "Don't worry if you're starting from scratch - we can help create everything!"
+                <h2 class="text-2xl font-bold mb-2">Social Media Strategy</h2>
+                <p class="text-gray-500 mb-8">Where should we focus your social energy?</p>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Platforms Needed</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                            <button onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-facebook text-blue-600"></i> Facebook</button>
+                            <button onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-instagram text-pink-600"></i> Instagram</button>
+                            <button onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-tiktok"></i> TikTok</button>
+                            <button onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-youtube text-red-600"></i> YouTube</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Account Needs</label>
+                        <div class="flex flex-col gap-2">
+                            <button onclick="toggleSelection(this, 'social-needs')" class="p-3 border rounded-lg text-left hover:border-blue-500">Create new accounts from scratch</button>
+                            <button onclick="toggleSelection(this, 'social-needs')" class="p-3 border rounded-lg text-left hover:border-blue-500">Optimize existing profiles</button>
+                            <button onclick="toggleSelection(this, 'social-needs')" class="p-3 border rounded-lg text-left hover:border-blue-500">Content Calendar & Strategy</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">How often do you want to post?</label>
+                        <input type="text" id="social-freq" class="w-full p-3 border rounded-lg" placeholder="e.g. 3 reels per week, daily stories">
+                    </div>
                 </div>
             </div>
 
-            <!-- Step 8: Final Summary -->
+            <!-- Step 8: Paid Ads Deep Dive (Conditional) -->
             <div id="step-8" class="step-content hidden">
-                <h2 class="text-2xl font-bold mb-2">Ready to Launch?</h2>
-                <p class="text-gray-500 mb-8">Review your details below and hit submit to send them straight to our team.</p>
+                <h2 class="text-2xl font-bold mb-2">Paid Advertising</h2>
+                <p class="text-gray-500 mb-8">How should we spend your ad budget?</p>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Ad Goals</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Calls</button>
+                            <button onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Bookings</button>
+                            <button onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Website Visits</button>
+                            <button onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Sales</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Monthly Ad Budget</label>
+                            <input type="text" id="ad-budget" class="w-full p-3 border rounded-lg" placeholder="e.g. $1,000 / month">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Target Locations</label>
+                            <input type="text" id="ad-locations" class="w-full p-3 border rounded-lg" placeholder="Cities or Radius">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Top Competitors (For targeting)</label>
+                        <textarea id="ad-competitors" class="w-full p-3 border rounded-lg h-20" placeholder="List names of 2-3 main competitors..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 9: Offers & Pricing -->
+            <div id="step-9" class="step-content hidden">
+                <h2 class="text-2xl font-bold mb-2">Offers & Pricing</h2>
+                <p class="text-gray-500 mb-8">What are you selling and for how much?</p>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">List your Services/Products & Prices</label>
+                        <textarea id="pricing-list" class="w-full p-3 border rounded-lg h-32" placeholder="e.g. Full Detail: $150, Interior Only: $80..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Special Offers or Seasonal Promos</label>
+                        <input type="text" id="special-offers" class="w-full p-3 border rounded-lg" placeholder="e.g. 20% off for first-time customers">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Memberships / Subscriptions / Bundles</label>
+                        <input type="text" id="bundles" class="w-full p-3 border rounded-lg" placeholder="e.g. Monthly maintenance plan for $50">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 10: Brand Voice -->
+            <div id="step-10" class="step-content hidden">
+                <h2 class="text-2xl font-bold mb-2">Brand Voice</h2>
+                <p class="text-gray-500 mb-8">How should your brand speak to people?</p>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Brand Sound</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Luxury</button>
+                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Bold</button>
+                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Expert</button>
+                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Fun</button>
+                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Clean</button>
+                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Trustworthy</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Slogan or Tagline</label>
+                        <input type="text" id="brand-slogan" class="w-full p-3 border rounded-lg" placeholder="e.g. 'Quality you can see'">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">3 words that describe your brand</label>
+                        <input type="text" id="brand-words" class="w-full p-3 border rounded-lg" placeholder="e.g. Fast, Reliable, Premium">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 11: Assets & Access -->
+            <div id="step-11" class="step-content hidden">
+                <h2 class="text-2xl font-bold mb-2">Assets & Access</h2>
+                <p class="text-gray-500 mb-8">What can you provide to help us get started?</p>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Available Assets</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Logo Files</button>
+                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Brand Photos</button>
+                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Videos</button>
+                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Testimonials</button>
+                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Before/After Shots</button>
+                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Team Photos</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Link to Assets (Google Drive / Dropbox)</label>
+                        <input type="url" id="asset-links" class="w-full p-3 border rounded-lg" placeholder="Paste link here...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Access you can provide</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Domain/Hosting</button>
+                            <button onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Google Ads</button>
+                            <button onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Facebook Page</button>
+                            <button onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Instagram</button>
+                            <button onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">GMB Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 12: Competition & Launch -->
+            <div id="step-12" class="step-content hidden">
+                <h2 class="text-2xl font-bold mb-2">Launch Timeline</h2>
+                <p class="text-gray-500 mb-8">When do we go live?</p>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Desired Launch Date</label>
+                        <input type="text" id="launch-date" class="w-full p-3 border rounded-lg" placeholder="e.g. June 1st, 2026">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Priority Order</label>
+                        <div class="flex flex-col gap-2">
+                            <button onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">Website first</button>
+                            <button onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">Social media first</button>
+                            <button onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">Ads first</button>
+                            <button onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">All at once</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Anything else we should know?</label>
+                        <textarea id="final-notes" class="w-full p-3 border rounded-lg h-24" placeholder="Special requests, deadlines, concerns..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 13: Final Review -->
+            <div id="step-13" class="step-content hidden">
+                <h2 class="text-2xl font-bold mb-2">Review & Submit</h2>
+                <p class="text-gray-500 mb-8">Double-check everything before sending.</p>
                 
-                <div class="bg-gray-900 rounded-xl p-6 text-gray-300 font-mono text-xs overflow-auto max-h-[250px] mb-6" id="final-summary">
+                <div class="bg-gray-900 rounded-xl p-6 text-gray-300 font-mono text-[10px] md:text-xs overflow-auto max-h-[350px] mb-6" id="final-summary">
                     <!-- Compiled data goes here -->
                 </div>
                 
                 <button onclick="submitProject()" id="submit-btn" class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-3">
                     <i class="fa-solid fa-paper-plane"></i> Submit Project
                 </button>
-                <button onclick="copyToClipboard()" id="copy-btn" class="w-full mt-4 py-2 text-blue-600 font-semibold text-sm hover:underline">
-                    Or copy data to clipboard instead
-                </button>
             </div>
 
-            <!-- Step 9: Success Screen -->
-            <div id="step-9" class="step-content hidden text-center py-12">
-                <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+            <!-- Step Success -->
+            <div id="step-success" class="step-content hidden text-center py-20">
+                <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
                     <i class="fa-solid fa-check"></i>
                 </div>
-                <h2 class="text-3xl font-bold mb-4">Project Submitted!</h2>
-                <p class="text-gray-500 mb-8">Thanks for providing your information. We've received your details and our team (and our AI) is already working on your custom plan. We'll be in touch shortly!</p>
-                <button onclick="location.reload()" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition-all">Submit Another Business</button>
+                <h2 class="text-3xl font-bold mb-4">Submission Successful!</h2>
+                <p class="text-gray-500 mb-8 max-w-md mx-auto">Thank you for taking the time to fill this out. We've received your data and our team is already reviewing it to create your project roadmap. We'll be in touch soon!</p>
+                <button onclick="location.reload()" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition-all">Submit Another</button>
             </div>
 
             <!-- Footer Navigation -->
@@ -260,42 +419,40 @@
     </div>
 
     <script>
-        // CONFIGURATION: Paste your Make.com or Zapier Webhook URL here
         const WEBHOOK_URL = 'https://hook.us2.make.com/lrrabq5wrgf49spbb9xv97wc9vnm1iu4';
-        const MY_EMAIL = 'jekenrichg@gmail.com'; // For fallback
+        const MY_EMAIL = 'jekenrichg@gmail.com';
 
         let currentStep = 1;
-        const totalSteps = 8;
+        const totalSteps = 13;
         const answers = {
             goals: [],
-            webFeatures: [],
+            webPages: [],
             socialPlatforms: [],
-            adPlatforms: [],
-            brandStyles: [],
-            assets: []
+            socialNeeds: [],
+            adGoals: [],
+            brandSounds: [],
+            assets: [],
+            access: []
         };
 
         function toggleSelection(el, category) {
             el.classList.toggle('card-selected');
             const text = el.innerText.trim();
-            
             const keyMap = {
-                'goal-website': 'goal_website',
-                'goal-social': 'goal_social',
-                'goal-ads': 'goal_ads',
-                'web-feature': 'web_features',
-                'social-platform': 'social_platforms',
-                'ad-platform': 'ad_platforms',
-                'brand-style': 'brand_styles',
-                'asset': 'assets'
+                'goal': 'goals',
+                'web-page': 'webPages',
+                'social-platform': 'socialPlatforms',
+                'social-needs': 'socialNeeds',
+                'ad-goal': 'adGoals',
+                'brand-sound': 'brandSounds',
+                'asset': 'assets',
+                'access': 'access'
             };
-
             const key = keyMap[category];
             if (el.classList.contains('card-selected')) {
-                if (!Array.isArray(answers[key])) answers[key] = [];
                 answers[key].push(text);
             } else {
-                answers[key] = answers[key].filter(item => item !== text);
+                answers[key] = answers[key].filter(i => i !== text);
             }
         }
 
@@ -308,42 +465,28 @@
 
         function nextStep() {
             if (currentStep === 1) {
-                const name = document.getElementById('client-name').value;
-                const email = document.getElementById('client-email').value;
-                const business = document.getElementById('business-name').value;
-                if (!name || !email || !business) {
-                    alert("Please fill in your name, email, and business name to continue.");
-                    return;
-                }
-            }
-            if (currentStep === 2) {
-                if (!answers.goal_website && !answers.goal_social && !answers.goal_ads) {
-                    alert("Please select at least one goal to continue.");
-                    return;
+                if (!document.getElementById('business-name').value || !document.getElementById('client-email').value) {
+                    alert("Business name and email are required."); return;
                 }
             }
 
-            let nextStepNum = currentStep + 1;
-            if (nextStepNum === 3 && !answers.goal_website) nextStepNum++;
-            if (nextStepNum === 4 && !answers.goal_social) nextStepNum++;
-            if (nextStepNum === 5 && !answers.goal_ads) nextStepNum++;
+            let nextNum = currentStep + 1;
+            
+            // Skip logic based on goals
+            if (nextNum === 6 && !answers.goals.some(g => g.toLowerCase().includes('website'))) nextNum++;
+            if (nextNum === 7 && !answers.goals.some(g => g.toLowerCase().includes('social'))) nextNum++;
+            if (nextNum === 8 && !answers.goals.some(g => g.toLowerCase().includes('ads'))) nextNum++;
 
-            if (nextStepNum <= totalSteps) {
-                goToStep(nextStepNum);
-            }
-            if (nextStepNum === 8) {
-                generateSummary();
-            }
+            if (nextNum <= totalSteps) goToStep(nextNum);
+            if (nextNum === 13) generateSummary();
         }
 
         function prevStep() {
-            let prevStepNum = currentStep - 1;
-            if (prevStepNum === 5 && !answers.goal_ads) prevStepNum--;
-            if (prevStepNum === 4 && !answers.goal_social) prevStepNum--;
-            if (prevStepNum === 3 && !answers.goal_website) prevStepNum--;
-            if (prevStepNum >= 1) {
-                goToStep(prevStepNum);
-            }
+            let prevNum = currentStep - 1;
+            if (prevNum === 8 && !answers.goals.some(g => g.toLowerCase().includes('ads'))) prevNum--;
+            if (prevNum === 7 && !answers.goals.some(g => g.toLowerCase().includes('social'))) prevNum--;
+            if (prevNum === 6 && !answers.goals.some(g => g.toLowerCase().includes('website'))) prevNum--;
+            if (prevNum >= 1) goToStep(prevNum);
         }
 
         function goToStep(num) {
@@ -354,90 +497,111 @@
         }
 
         function updateProgress() {
-            const progress = (Math.min(currentStep, 8) / totalSteps) * 100;
+            const progress = (currentStep / totalSteps) * 100;
             document.getElementById('progress-bar').style.width = `${progress}%`;
-            document.getElementById('progress-text').innerText = currentStep >= 9 ? 'Done!' : `Step ${currentStep} of ${totalSteps}`;
-            
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const footer = document.getElementById('footer-nav');
-            
-            if (currentStep >= 9) {
-                footer.classList.add('hidden');
-                return;
-            }
-
-            if (currentStep === 1) prevBtn.classList.add('hidden');
-            else prevBtn.classList.remove('hidden');
-
-            if (currentStep === totalSteps) nextBtn.classList.add('hidden');
-            else nextBtn.innerText = 'Next';
+            document.getElementById('progress-text').innerText = `Step ${currentStep} of ${totalSteps}`;
+            const pb = document.getElementById('prev-btn');
+            const nb = document.getElementById('next-btn');
+            if (currentStep === 1) pb.classList.add('hidden'); else pb.classList.remove('hidden');
+            if (currentStep === totalSteps) nb.classList.add('hidden'); else nb.innerText = 'Next';
         }
 
-        function getCompiledData() {
+        function getFullData() {
             return {
-                client_name: document.getElementById('client-name').value,
-                client_email: document.getElementById('client-email').value,
-                business_name: document.getElementById('business-name').value,
-                business_type: document.getElementById('business-type').value || 'N/A',
-                goals: [
-                    answers.goal_website ? "Website" : null,
-                    answers.goal_social ? "Social Media" : null,
-                    answers.goal_ads ? "Paid Advertising" : null
-                ].filter(Boolean),
+                basics: {
+                    business_name: document.getElementById('business-name').value,
+                    client_name: document.getElementById('client-name').value,
+                    email: document.getElementById('client-email').value,
+                    phone: document.getElementById('client-phone').value,
+                    address: document.getElementById('business-address').value,
+                    service_area: document.getElementById('service-area').value,
+                    hours: document.getElementById('business-hours').value
+                },
+                presence: {
+                    website: document.getElementById('website-url').value,
+                    social_links: document.getElementById('social-links').value,
+                    gmb: document.getElementById('google-profile').value
+                },
+                business: {
+                    category: answers['business-category'] || document.getElementById('business-category-other').value,
+                    top_services: document.getElementById('top-services').value,
+                    usp: document.getElementById('usp').value,
+                    ideal_customer: document.getElementById('ideal-customer').value,
+                    mode: answers['work-mode']
+                },
+                goals: {
+                    list: answers.goals,
+                    success: document.getElementById('goal-success').value
+                },
                 website: {
-                    type: answers['web-type'] || 'N/A',
-                    features: answers.web_features || []
+                    type: answers['web-type'],
+                    pages: answers.webPages,
+                    features: document.getElementById('web-features').value,
+                    tone: document.getElementById('web-tone').value
                 },
                 social: {
-                    platforms: answers.social_platforms || [],
-                    service_level: answers['social-service'] || 'N/A'
+                    platforms: answers.socialPlatforms,
+                    needs: answers.socialNeeds,
+                    frequency: document.getElementById('social-freq').value
                 },
-                advertising: {
-                    platforms: answers.ad_platforms || [],
-                    monthly_budget: document.getElementById('ad-budget').value
+                ads: {
+                    goals: answers.adGoals,
+                    budget: document.getElementById('ad-budget').value,
+                    locations: document.getElementById('ad-locations').value,
+                    competitors: document.getElementById('ad-competitors').value
+                },
+                pricing: {
+                    list: document.getElementById('pricing-list').value,
+                    offers: document.getElementById('special-offers').value,
+                    bundles: document.getElementById('bundles').value
                 },
                 brand: {
-                    styles: answers.brand_styles || [],
-                    notes: document.getElementById('brand-notes').value || 'None'
+                    sounds: answers.brandSounds,
+                    slogan: document.getElementById('brand-slogan').value,
+                    words: document.getElementById('brand-words').value
                 },
-                assets_available: answers.assets || []
+                assets: {
+                    list: answers.assets,
+                    links: document.getElementById('asset-links').value,
+                    access: answers.access
+                },
+                timeline: {
+                    launch_date: document.getElementById('launch-date').value,
+                    priority: answers['priority'],
+                    notes: document.getElementById('final-notes').value
+                }
             };
         }
 
         function generateSummary() {
-            const data = getCompiledData();
-            const summaryText = `### NEW CLIENT: ${data.client_name} ###\n` +
-                `EMAIL: ${data.client_email}\n` +
-                `BUSINESS: ${data.business_name} (${data.business_type})\n` +
-                `GOALS: ${data.goals.join(', ')}\n\n` +
-                (data.goals.includes('Website') ? `WEBSITE NEEDS:\n- Type: ${data.website.type}\n- Features: ${data.website.features.join(', ') || 'None'}\n\n` : '') +
-                (data.goals.includes('Social Media') ? `SOCIAL MEDIA:\n- Platforms: ${data.social.platforms.join(', ') || 'None'}\n- Level: ${data.social.service_level}\n\n` : '') +
-                (data.goals.includes('Paid Advertising') ? `ADVERTISING:\n- Platforms: ${data.advertising.platforms.join(', ') || 'None'}\n- Budget: ${data.advertising.monthly_budget}\n\n` : '') +
-                `BRAND VIBE: ${data.brand.styles.join(', ') || 'General'}\n` +
-                `NOTES: ${data.brand.notes}\n\n` +
-                `ASSETS PROVIDED: ${data.assets_available.join(', ') || 'None'}\n\n` +
-                `### AI PROJECT GENERATION PROMPT ###\n` +
-                `You are an expert agency project manager. Based on this data, generate a full project roadmap, a sitemap, and a 30-day content calendar for ${data.business_name}.`;
-
-            document.getElementById('final-summary').innerText = summaryText;
-            return summaryText;
+            const d = getFullData();
+            let s = `### PROJECT BRIEF: ${d.basics.business_name} ###\n\n`;
+            s += `1. BASICS\n- Client: ${d.basics.client_name}\n- Contact: ${d.basics.email} / ${d.basics.phone}\n- Area: ${d.basics.service_area}\n- Hours: ${d.basics.hours}\n\n`;
+            s += `2. BUSINESS INFO\n- Category: ${d.business.category}\n- USP: ${d.business.usp}\n- Services: ${d.business.top_services}\n- Ideal Customer: ${d.business.ideal_customer}\n\n`;
+            s += `3. GOALS\n- Targets: ${d.goals.list.join(', ')}\n- 90 Day Success: ${d.goals.success}\n\n`;
+            if (d.goals.list.some(g => g.toLowerCase().includes('website'))) {
+                s += `4. WEBSITE\n- Type: ${d.website.type}\n- Pages: ${d.website.pages.join(', ')}\n- Features: ${d.website.features}\n- Tone: ${d.website.tone}\n\n`;
+            }
+            if (d.goals.list.some(g => g.toLowerCase().includes('social'))) {
+                s += `5. SOCIAL\n- Platforms: ${d.social.platforms.join(', ')}\n- Needs: ${d.social.needs.join(', ')}\n- Frequency: ${d.social.frequency}\n\n`;
+            }
+            if (d.goals.list.some(g => g.toLowerCase().includes('ads'))) {
+                s += `6. ADS\n- Budget: ${d.ads.budget}\n- Goals: ${d.ads.goals.join(', ')}\n- Targets: ${d.ads.locations}\n\n`;
+            }
+            s += `7. BRAND & PRICING\n- Slogan: ${d.brand.slogan}\n- Vibe: ${d.brand.sounds.join(', ')}\n- Pricing: ${d.pricing.list}\n\n`;
+            s += `8. ASSETS & TIMELINE\n- Ready: ${d.assets.list.join(', ')}\n- Priority: ${d.timeline.priority}\n- Launch: ${d.timeline.launch_date}\n\n`;
+            s += `### AI INSTRUCTION: Create a full website sitemap, copy for all pages, and a 30-day social strategy based on this brief. ###`;
+            
+            document.getElementById('final-summary').innerText = s;
         }
 
         async function submitProject() {
             const btn = document.getElementById('submit-btn');
-            const data = getCompiledData();
-            const prompt = generateSummary();
+            const data = getFullData();
+            const prompt = document.getElementById('final-summary').innerText;
             
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
-
-            if (WEBHOOK_URL === 'YOUR_WEBHOOK_URL_HERE') {
-                const mailtoLink = `mailto:${MY_EMAIL}?subject=New Project Request: ${data.business_name}&body=${encodeURIComponent(prompt)}`;
-                window.location.href = mailtoLink;
-                goToStep(9);
-                return;
-            }
 
             try {
                 const response = await fetch(WEBHOOK_URL, {
@@ -445,27 +609,16 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ ...data, ai_prompt: prompt })
                 });
-
                 if (response.ok) {
-                    goToStep(9);
-                } else {
-                    throw new Error('Submission failed');
-                }
-            } catch (error) {
-                alert("Submit failed, but you can still send it via email!");
-                const mailtoLink = `mailto:${MY_EMAIL}?subject=New Project Request: ${data.business_name}&body=${encodeURIComponent(prompt)}`;
-                window.location.href = mailtoLink;
-                goToStep(9);
+                    document.getElementById('step-13').classList.add('hidden');
+                    document.getElementById('footer-nav').classList.add('hidden');
+                    document.getElementById('step-success').classList.remove('hidden');
+                    document.getElementById('progress-bar').style.width = '100%';
+                } else { throw new Error(); }
+            } catch (e) {
+                alert("Submission failed. Sending via email instead.");
+                window.location.href = `mailto:${MY_EMAIL}?subject=New Project: ${data.basics.business_name}&body=${encodeURIComponent(prompt)}`;
             }
-        }
-
-        function copyToClipboard() {
-            const text = document.getElementById('final-summary').innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = document.getElementById('copy-btn');
-                btn.innerText = '✓ Data Copied!';
-                setTimeout(() => btn.innerText = 'Or copy data to clipboard instead', 2000);
-            });
         }
     </script>
 </body>

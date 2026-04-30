@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .step-transition { transition: all 0.3s ease-in-out; }
-        .card-selected { border-color: #3b82f6; background-color: #eff6ff; }
+        .card-selected { border-color: #3b82f6 !important; background-color: #eff6ff !important; }
         .progress-bar { transition: width 0.5s ease-in-out; }
         input:focus, textarea:focus, select:focus { border-color: #3b82f6; ring: 2px; ring-color: #3b82f6; outline: none; }
     </style>
@@ -106,10 +106,10 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Business Category</label>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                            <button onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Barber Shop</button>
-                            <button onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Clothing Brand</button>
-                            <button onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Auto Shop</button>
-                            <button onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Detailing Service</button>
+                            <button type="button" onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Barber Shop</button>
+                            <button type="button" onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Clothing Brand</button>
+                            <button type="button" onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Auto Shop</button>
+                            <button type="button" onclick="setRadioSelection(this, 'business-category')" class="p-2 border rounded-lg text-sm font-semibold hover:border-blue-500">Detailing Service</button>
                         </div>
                         <input type="text" id="business-category-other" class="w-full mt-2 p-3 border rounded-lg text-sm" placeholder="Other category...">
                     </div>
@@ -128,9 +128,9 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">How do you work?</label>
                         <div class="flex gap-4">
-                            <button onclick="setRadioSelection(this, 'work-mode')" class="flex-1 p-3 border rounded-lg font-semibold hover:border-blue-500">Local Only</button>
-                            <button onclick="setRadioSelection(this, 'work-mode')" class="flex-1 p-3 border rounded-lg font-semibold hover:border-blue-500">Online Only</button>
-                            <button onclick="setRadioSelection(this, 'work-mode')" class="flex-1 p-3 border rounded-lg font-semibold hover:border-blue-500">Both</button>
+                            <button type="button" onclick="setRadioSelection(this, 'work-mode')" class="flex-1 p-3 border rounded-lg font-semibold hover:border-blue-500">Local Only</button>
+                            <button type="button" onclick="setRadioSelection(this, 'work-mode')" class="flex-1 p-3 border rounded-lg font-semibold hover:border-blue-500">Online Only</button>
+                            <button type="button" onclick="setRadioSelection(this, 'work-mode')" class="flex-1 p-3 border rounded-lg font-semibold hover:border-blue-500">Both</button>
                         </div>
                     </div>
                 </div>
@@ -141,27 +141,27 @@
                 <h2 class="text-2xl font-bold mb-2">What are your primary goals?</h2>
                 <p class="text-gray-500 mb-8">Select everything you want to achieve.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                    <button type="button" onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
                         <span class="font-bold">Get more leads</span>
                         <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
                     </button>
-                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                    <button type="button" onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
                         <span class="font-bold">Get more bookings</span>
                         <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
                     </button>
-                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                    <button type="button" onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
                         <span class="font-bold">Sell products online</span>
                         <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
                     </button>
-                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                    <button type="button" onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
                         <span class="font-bold">Set up social media</span>
                         <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
                     </button>
-                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                    <button type="button" onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
                         <span class="font-bold">Launch Google Ads</span>
                         <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
                     </button>
-                    <button onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
+                    <button type="button" onclick="toggleSelection(this, 'goal')" class="p-3 border-2 rounded-xl text-left hover:border-blue-500 flex justify-between items-center group">
                         <span class="font-bold">Create new website</span>
                         <i class="fa-solid fa-check opacity-0 group-[.card-selected]:opacity-100 text-blue-600"></i>
                     </button>
@@ -174,7 +174,7 @@
                 </div>
             </div>
 
-            <!-- Step 6: Website Needs (Conditional) -->
+            <!-- Step 6: Website Needs -->
             <div id="step-6" class="step-content hidden">
                 <h2 class="text-2xl font-bold mb-2">Website Specifics</h2>
                 <p class="text-gray-500 mb-8">Define your vision for the site.</p>
@@ -182,25 +182,25 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Website Type</label>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                            <button onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">One-Page</button>
-                            <button onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Multi-Page</button>
-                            <button onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">E-Commerce</button>
-                            <button onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Booking Focus</button>
-                            <button onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Portfolio</button>
+                            <button type="button" onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">One-Page</button>
+                            <button type="button" onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Multi-Page</button>
+                            <button type="button" onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">E-Commerce</button>
+                            <button type="button" onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Booking Focus</button>
+                            <button type="button" onclick="setRadioSelection(this, 'web-type')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Portfolio</button>
                         </div>
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Pages Needed</label>
                         <div class="flex flex-wrap gap-2">
-                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Home</button>
-                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">About</button>
-                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Services</button>
-                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Products</button>
-                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Gallery</button>
-                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Reviews</button>
-                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Contact</button>
-                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">FAQ</button>
-                            <button onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Blog</button>
+                            <button type="button" onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Home</button>
+                            <button type="button" onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">About</button>
+                            <button type="button" onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Services</button>
+                            <button type="button" onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Products</button>
+                            <button type="button" onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Gallery</button>
+                            <button type="button" onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Reviews</button>
+                            <button type="button" onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Contact</button>
+                            <button type="button" onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">FAQ</button>
+                            <button type="button" onclick="toggleSelection(this, 'web-page')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Blog</button>
                         </div>
                     </div>
                     <div>
@@ -221,7 +221,7 @@
                 </div>
             </div>
 
-            <!-- Step 7: Social Media Deep Dive (Conditional) -->
+            <!-- Step 7: Social Media Strategy -->
             <div id="step-7" class="step-content hidden">
                 <h2 class="text-2xl font-bold mb-2">Social Media Strategy</h2>
                 <p class="text-gray-500 mb-8">Where should we focus your social energy?</p>
@@ -229,18 +229,18 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Platforms Needed</label>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                            <button onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-facebook text-blue-600"></i> Facebook</button>
-                            <button onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-instagram text-pink-600"></i> Instagram</button>
-                            <button onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-tiktok"></i> TikTok</button>
-                            <button onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-youtube text-red-600"></i> YouTube</button>
+                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-facebook text-blue-600"></i> Facebook</button>
+                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-instagram text-pink-600"></i> Instagram</button>
+                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-tiktok"></i> TikTok</button>
+                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-youtube text-red-600"></i> YouTube</button>
                         </div>
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Account Needs</label>
                         <div class="flex flex-col gap-2">
-                            <button onclick="toggleSelection(this, 'social-needs')" class="p-3 border rounded-lg text-left hover:border-blue-500">Create new accounts from scratch</button>
-                            <button onclick="toggleSelection(this, 'social-needs')" class="p-3 border rounded-lg text-left hover:border-blue-500">Optimize existing profiles</button>
-                            <button onclick="toggleSelection(this, 'social-needs')" class="p-3 border rounded-lg text-left hover:border-blue-500">Content Calendar & Strategy</button>
+                            <button type="button" onclick="toggleSelection(this, 'social-needs')" class="p-3 border rounded-lg text-left hover:border-blue-500">Create new accounts from scratch</button>
+                            <button type="button" onclick="toggleSelection(this, 'social-needs')" class="p-3 border rounded-lg text-left hover:border-blue-500">Optimize existing profiles</button>
+                            <button type="button" onclick="toggleSelection(this, 'social-needs')" class="p-3 border rounded-lg text-left hover:border-blue-500">Content Calendar & Strategy</button>
                         </div>
                     </div>
                     <div>
@@ -250,7 +250,7 @@
                 </div>
             </div>
 
-            <!-- Step 8: Paid Ads Deep Dive (Conditional) -->
+            <!-- Step 8: Paid Advertising -->
             <div id="step-8" class="step-content hidden">
                 <h2 class="text-2xl font-bold mb-2">Paid Advertising</h2>
                 <p class="text-gray-500 mb-8">How should we spend your ad budget?</p>
@@ -258,10 +258,10 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Ad Goals</label>
                         <div class="flex flex-wrap gap-2">
-                            <button onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Calls</button>
-                            <button onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Bookings</button>
-                            <button onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Website Visits</button>
-                            <button onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Sales</button>
+                            <button type="button" onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Calls</button>
+                            <button type="button" onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Bookings</button>
+                            <button type="button" onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Website Visits</button>
+                            <button type="button" onclick="toggleSelection(this, 'ad-goal')" class="px-4 py-2 border rounded-full text-xs font-bold hover:border-blue-500">Sales</button>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -309,12 +309,12 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Brand Sound</label>
                         <div class="grid grid-cols-3 gap-2">
-                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Luxury</button>
-                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Bold</button>
-                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Expert</button>
-                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Fun</button>
-                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Clean</button>
-                            <button onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Trustworthy</button>
+                            <button type="button" onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Luxury</button>
+                            <button type="button" onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Bold</button>
+                            <button type="button" onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Expert</button>
+                            <button type="button" onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Fun</button>
+                            <button type="button" onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Clean</button>
+                            <button type="button" onclick="toggleSelection(this, 'brand-sound')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Trustworthy</button>
                         </div>
                     </div>
                     <div>
@@ -336,12 +336,12 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Available Assets</label>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Logo Files</button>
-                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Brand Photos</button>
-                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Videos</button>
-                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Testimonials</button>
-                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Before/After Shots</button>
-                            <button onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Team Photos</button>
+                            <button type="button" onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Logo Files</button>
+                            <button type="button" onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Brand Photos</button>
+                            <button type="button" onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Videos</button>
+                            <button type="button" onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Testimonials</button>
+                            <button type="button" onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Before/After Shots</button>
+                            <button type="button" onclick="toggleSelection(this, 'asset')" class="p-2 border rounded-lg text-xs font-bold hover:border-blue-500">Team Photos</button>
                         </div>
                     </div>
                     <div>
@@ -351,17 +351,17 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Access you can provide</label>
                         <div class="flex flex-wrap gap-2">
-                            <button onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Domain/Hosting</button>
-                            <button onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Google Ads</button>
-                            <button onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Facebook Page</button>
-                            <button onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Instagram</button>
-                            <button onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">GMB Profile</button>
+                            <button type="button" onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Domain/Hosting</button>
+                            <button type="button" onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Google Ads</button>
+                            <button type="button" onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Facebook Page</button>
+                            <button type="button" onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">Instagram</button>
+                            <button type="button" onclick="toggleSelection(this, 'access')" class="px-3 py-1 border rounded-full text-xs font-bold hover:border-blue-500">GMB Profile</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Step 12: Competition & Launch -->
+            <!-- Step 12: Launch Timeline -->
             <div id="step-12" class="step-content hidden">
                 <h2 class="text-2xl font-bold mb-2">Launch Timeline</h2>
                 <p class="text-gray-500 mb-8">When do we go live?</p>
@@ -373,10 +373,10 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Priority Order</label>
                         <div class="flex flex-col gap-2">
-                            <button onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">Website first</button>
-                            <button onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">Social media first</button>
-                            <button onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">Ads first</button>
-                            <button onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">All at once</button>
+                            <button type="button" onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">Website first</button>
+                            <button type="button" onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">Social media first</button>
+                            <button type="button" onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">Ads first</button>
+                            <button type="button" onclick="setRadioSelection(this, 'priority')" class="p-3 border rounded-lg text-left font-semibold hover:border-blue-500">All at once</button>
                         </div>
                     </div>
                     <div>
@@ -395,7 +395,7 @@
                     <!-- Compiled data goes here -->
                 </div>
                 
-                <button onclick="submitProject()" id="submit-btn" class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-3">
+                <button type="button" onclick="submitProject()" id="submit-btn" class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-3">
                     <i class="fa-solid fa-paper-plane"></i> Submit Project
                 </button>
             </div>
@@ -407,13 +407,13 @@
                 </div>
                 <h2 class="text-3xl font-bold mb-4">Submission Successful!</h2>
                 <p class="text-gray-500 mb-8 max-w-md mx-auto">Thank you for taking the time to fill this out. We've received your data and our team is already reviewing it to create your project roadmap. We'll be in touch soon!</p>
-                <button onclick="location.reload()" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition-all">Submit Another</button>
+                <button type="button" onclick="location.reload()" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition-all">Submit Another</button>
             </div>
 
             <!-- Footer Navigation -->
             <div id="footer-nav" class="mt-auto pt-8 flex justify-between gap-4">
-                <button id="prev-btn" onclick="prevStep()" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition-all hidden">Back</button>
-                <button id="next-btn" onclick="nextStep()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all">Next</button>
+                <button type="button" id="prev-btn" onclick="prevStep()" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition-all hidden">Back</button>
+                <button type="button" id="next-btn" onclick="nextStep()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all">Next</button>
             </div>
         </div>
     </div>
@@ -465,28 +465,52 @@
 
         function nextStep() {
             if (currentStep === 1) {
-                if (!document.getElementById('business-name').value || !document.getElementById('client-email').value) {
-                    alert("Business name and email are required."); return;
+                const bName = document.getElementById('business-name').value;
+                const cEmail = document.getElementById('client-email').value;
+                if (!bName || !cEmail) {
+                    alert("Business name and email are required."); 
+                    return;
                 }
             }
 
             let nextNum = currentStep + 1;
             
-            // Skip logic based on goals
-            if (nextNum === 6 && !answers.goals.some(g => g.toLowerCase().includes('website'))) nextNum++;
-            if (nextNum === 7 && !answers.goals.some(g => g.toLowerCase().includes('social'))) nextNum++;
-            if (nextNum === 8 && !answers.goals.some(g => g.toLowerCase().includes('ads'))) nextNum++;
+            // Branching logic: skip specific steps if goals aren't selected
+            const hasWebsiteGoal = answers.goals.some(g => g.toLowerCase().includes('website'));
+            const hasSocialGoal = answers.goals.some(g => g.toLowerCase().includes('social'));
+            const hasAdsGoal = answers.goals.some(g => g.toLowerCase().includes('ads'));
 
-            if (nextNum <= totalSteps) goToStep(nextNum);
-            if (nextNum === 13) generateSummary();
+            if (nextNum === 6 && !hasWebsiteGoal) nextNum++;
+            if (nextNum === 7 && !hasSocialGoal) nextNum++;
+            if (nextNum === 8 && !hasAdsGoal) nextNum++;
+
+            // Handle double skips (e.g., skip 6 and 7 if neither goal selected)
+            if (nextNum === 7 && !hasSocialGoal) nextNum++;
+            if (nextNum === 8 && !hasAdsGoal) nextNum++;
+            if (nextNum === 8 && !hasAdsGoal) nextNum++;
+
+            if (nextNum <= totalSteps) {
+                goToStep(nextNum);
+            }
+            if (nextNum === 13) {
+                generateSummary();
+            }
         }
 
         function prevStep() {
             let prevNum = currentStep - 1;
-            if (prevNum === 8 && !answers.goals.some(g => g.toLowerCase().includes('ads'))) prevNum--;
-            if (prevNum === 7 && !answers.goals.some(g => g.toLowerCase().includes('social'))) prevNum--;
-            if (prevNum === 6 && !answers.goals.some(g => g.toLowerCase().includes('website'))) prevNum--;
-            if (prevNum >= 1) goToStep(prevNum);
+            
+            const hasWebsiteGoal = answers.goals.some(g => g.toLowerCase().includes('website'));
+            const hasSocialGoal = answers.goals.some(g => g.toLowerCase().includes('social'));
+            const hasAdsGoal = answers.goals.some(g => g.toLowerCase().includes('ads'));
+
+            if (prevNum === 8 && !hasAdsGoal) prevNum--;
+            if (prevNum === 7 && !hasSocialGoal) prevNum--;
+            if (prevNum === 6 && !hasWebsiteGoal) prevNum--;
+
+            if (prevNum >= 1) {
+                goToStep(prevNum);
+            }
         }
 
         function goToStep(num) {
@@ -494,16 +518,22 @@
             document.getElementById(`step-${num}`).classList.remove('hidden');
             currentStep = num;
             updateProgress();
+            window.scrollTo(0, 0);
         }
 
         function updateProgress() {
             const progress = (currentStep / totalSteps) * 100;
             document.getElementById('progress-bar').style.width = `${progress}%`;
             document.getElementById('progress-text').innerText = `Step ${currentStep} of ${totalSteps}`;
+            
             const pb = document.getElementById('prev-btn');
             const nb = document.getElementById('next-btn');
-            if (currentStep === 1) pb.classList.add('hidden'); else pb.classList.remove('hidden');
-            if (currentStep === totalSteps) nb.classList.add('hidden'); else nb.innerText = 'Next';
+            
+            if (currentStep === 1) pb.classList.add('hidden'); 
+            else pb.classList.remove('hidden');
+            
+            if (currentStep === totalSteps) nb.classList.add('hidden'); 
+            else nb.innerText = 'Next';
         }
 
         function getFullData() {
@@ -579,6 +609,7 @@
             s += `1. BASICS\n- Client: ${d.basics.client_name}\n- Contact: ${d.basics.email} / ${d.basics.phone}\n- Area: ${d.basics.service_area}\n- Hours: ${d.basics.hours}\n\n`;
             s += `2. BUSINESS INFO\n- Category: ${d.business.category}\n- USP: ${d.business.usp}\n- Services: ${d.business.top_services}\n- Ideal Customer: ${d.business.ideal_customer}\n\n`;
             s += `3. GOALS\n- Targets: ${d.goals.list.join(', ')}\n- 90 Day Success: ${d.goals.success}\n\n`;
+            
             if (d.goals.list.some(g => g.toLowerCase().includes('website'))) {
                 s += `4. WEBSITE\n- Type: ${d.website.type}\n- Pages: ${d.website.pages.join(', ')}\n- Features: ${d.website.features}\n- Tone: ${d.website.tone}\n\n`;
             }
@@ -586,10 +617,11 @@
                 s += `5. SOCIAL\n- Platforms: ${d.social.platforms.join(', ')}\n- Needs: ${d.social.needs.join(', ')}\n- Frequency: ${d.social.frequency}\n\n`;
             }
             if (d.goals.list.some(g => g.toLowerCase().includes('ads'))) {
-                s += `6. ADS\n- Budget: ${d.ads.budget}\n- Goals: ${d.ads.goals.join(', ')}\n- Targets: ${d.ads.locations}\n\n`;
+                s += `6. ADS\n- Budget: ${d.ads.budget}\n- Goals: ${d.ads.goals.join(', ')}\n- Targets: ${d.ads.locations}\n- Competitors: ${d.ads.competitors}\n\n`;
             }
-            s += `7. BRAND & PRICING\n- Slogan: ${d.brand.slogan}\n- Vibe: ${d.brand.sounds.join(', ')}\n- Pricing: ${d.pricing.list}\n\n`;
-            s += `8. ASSETS & TIMELINE\n- Ready: ${d.assets.list.join(', ')}\n- Priority: ${d.timeline.priority}\n- Launch: ${d.timeline.launch_date}\n\n`;
+            
+            s += `7. BRAND & PRICING\n- Slogan: ${d.brand.slogan}\n- Vibe: ${d.brand.sounds.join(', ')}\n- Pricing: ${d.pricing.list}\n- Special Offers: ${d.pricing.offers}\n\n`;
+            s += `8. ASSETS & TIMELINE\n- Ready: ${d.assets.list.join(', ')}\n- Links: ${d.assets.links}\n- Priority: ${d.timeline.priority}\n- Launch: ${d.timeline.launch_date}\n\n`;
             s += `### AI INSTRUCTION: Create a full website sitemap, copy for all pages, and a 30-day social strategy based on this brief. ###`;
             
             document.getElementById('final-summary').innerText = s;
@@ -609,15 +641,24 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ ...data, ai_prompt: prompt })
                 });
+
                 if (response.ok) {
                     document.getElementById('step-13').classList.add('hidden');
                     document.getElementById('footer-nav').classList.add('hidden');
                     document.getElementById('step-success').classList.remove('hidden');
                     document.getElementById('progress-bar').style.width = '100%';
-                } else { throw new Error(); }
+                } else { 
+                    throw new Error('Server error'); 
+                }
             } catch (e) {
-                alert("Submission failed. Sending via email instead.");
-                window.location.href = `mailto:${MY_EMAIL}?subject=New Project: ${data.basics.business_name}&body=${encodeURIComponent(prompt)}`;
+                alert("Submission failed. Opening your email app to send the data manually...");
+                const mailtoLink = `mailto:${MY_EMAIL}?subject=New Project: ${data.basics.business_name}&body=${encodeURIComponent(prompt)}`;
+                window.location.href = mailtoLink;
+                
+                // Show success anyway since they are emailing it
+                document.getElementById('step-13').classList.add('hidden');
+                document.getElementById('footer-nav').classList.add('hidden');
+                document.getElementById('step-success').classList.remove('hidden');
             }
         }
     </script>

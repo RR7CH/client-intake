@@ -32,9 +32,19 @@
             <!-- Step 1: Basics -->
             <div id="step-1" class="step-content">
                 <h2 class="text-2xl font-bold mb-2">Let's start with the basics</h2>
-                <p class="text-gray-500 mb-8">Tell us about your business so we can tailor the next steps.</p>
+                <p class="text-gray-500 mb-8">Tell us who you are and what your business is called.</p>
                 
                 <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Your Name</label>
+                            <input type="text" id="client-name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Email Address</label>
+                            <input type="email" id="client-email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. john@example.com">
+                        </div>
+                    </div>
                     <div>
                         <label class="block text-sm font-semibold mb-2">Business Name</label>
                         <input type="text" id="business-name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. Blue Sky Auto Repair">
@@ -216,17 +226,29 @@
 
             <!-- Step 8: Final Summary -->
             <div id="step-8" class="step-content hidden">
-                <h2 class="text-2xl font-bold mb-2">Review & Submit</h2>
-                <p class="text-gray-500 mb-8">Your information package is ready for processing.</p>
+                <h2 class="text-2xl font-bold mb-2">Ready to Launch?</h2>
+                <p class="text-gray-500 mb-8">Review your details below and hit submit to send them straight to our team.</p>
                 
-                <div class="bg-gray-900 rounded-xl p-6 text-gray-300 font-mono text-xs overflow-auto max-h-[300px] mb-6" id="final-summary">
+                <div class="bg-gray-900 rounded-xl p-6 text-gray-300 font-mono text-xs overflow-auto max-h-[250px] mb-6" id="final-summary">
                     <!-- Compiled data goes here -->
                 </div>
                 
-                <button onclick="copyToClipboard()" id="copy-btn" class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-copy"></i> Copy for AI Generation
+                <button onclick="submitProject()" id="submit-btn" class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-paper-plane"></i> Submit Project
                 </button>
-                <p class="text-center text-xs text-gray-400 mt-4">Once copied, paste this into your AI assistant to generate your project plan.</p>
+                <button onclick="copyToClipboard()" id="copy-btn" class="w-full mt-4 py-2 text-blue-600 font-semibold text-sm hover:underline">
+                    Or copy data to clipboard instead
+                </button>
+            </div>
+
+            <!-- Step 9: Success Screen -->
+            <div id="step-9" class="step-content hidden text-center py-12">
+                <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h2 class="text-3xl font-bold mb-4">Project Submitted!</h2>
+                <p class="text-gray-500 mb-8">Thanks for providing your information. We've received your details and our team (and our AI) is already working on your custom plan. We'll be in touch shortly!</p>
+                <button onclick="location.reload()" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold hover:bg-gray-200 transition-all">Submit Another Business</button>
             </div>
 
             <!-- Footer Navigation -->
@@ -238,6 +260,10 @@
     </div>
 
     <script>
+        // CONFIGURATION: Paste your Make.com or Zapier Webhook URL here
+        const WEBHOOK_URL = 'YOUR_WEBHOOK_URL_HERE';
+        const MY_EMAIL = 'YOUR_EMAIL_HERE'; // For fallback
+
         let currentStep = 1;
         const totalSteps = 8;
         const answers = {
@@ -253,7 +279,6 @@
             el.classList.toggle('card-selected');
             const text = el.innerText.trim();
             
-            // Map categories to state keys
             const keyMap = {
                 'goal-website': 'goal_website',
                 'goal-social': 'goal_social',
@@ -275,16 +300,22 @@
         }
 
         function setRadioSelection(el, category) {
-            // Find all buttons in the same parent and remove selection
             const siblings = el.parentElement.querySelectorAll('button');
             siblings.forEach(s => s.classList.remove('card-selected'));
-            
             el.classList.add('card-selected');
             answers[category] = el.innerText.trim();
         }
 
         function nextStep() {
-            // Logic for branching: Skip steps if goals aren't selected
+            if (currentStep === 1) {
+                const name = document.getElementById('client-name').value;
+                const email = document.getElementById('client-email').value;
+                const business = document.getElementById('business-name').value;
+                if (!name || !email || !business) {
+                    alert("Please fill in your name, email, and business name to continue.");
+                    return;
+                }
+            }
             if (currentStep === 2) {
                 if (!answers.goal_website && !answers.goal_social && !answers.goal_ads) {
                     alert("Please select at least one goal to continue.");
@@ -293,8 +324,6 @@
             }
 
             let nextStepNum = currentStep + 1;
-
-            // Branching Logic
             if (nextStepNum === 3 && !answers.goal_website) nextStepNum++;
             if (nextStepNum === 4 && !answers.goal_social) nextStepNum++;
             if (nextStepNum === 5 && !answers.goal_ads) nextStepNum++;
@@ -302,7 +331,6 @@
             if (nextStepNum <= totalSteps) {
                 goToStep(nextStepNum);
             }
-            
             if (nextStepNum === 8) {
                 generateSummary();
             }
@@ -310,12 +338,9 @@
 
         function prevStep() {
             let prevStepNum = currentStep - 1;
-
-            // Branching Logic backwards
             if (prevStepNum === 5 && !answers.goal_ads) prevStepNum--;
             if (prevStepNum === 4 && !answers.goal_social) prevStepNum--;
             if (prevStepNum === 3 && !answers.goal_website) prevStepNum--;
-
             if (prevStepNum >= 1) {
                 goToStep(prevStepNum);
             }
@@ -324,19 +349,24 @@
         function goToStep(num) {
             document.querySelectorAll('.step-content').forEach(s => s.classList.add('hidden'));
             document.getElementById(`step-${num}`).classList.remove('hidden');
-            
             currentStep = num;
             updateProgress();
         }
 
         function updateProgress() {
-            const progress = (currentStep / totalSteps) * 100;
+            const progress = (Math.min(currentStep, 8) / totalSteps) * 100;
             document.getElementById('progress-bar').style.width = `${progress}%`;
-            document.getElementById('progress-text').innerText = `Step ${currentStep} of ${totalSteps}`;
+            document.getElementById('progress-text').innerText = currentStep >= 9 ? 'Done!' : `Step ${currentStep} of ${totalSteps}`;
             
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
+            const footer = document.getElementById('footer-nav');
             
+            if (currentStep >= 9) {
+                footer.classList.add('hidden');
+                return;
+            }
+
             if (currentStep === 1) prevBtn.classList.add('hidden');
             else prevBtn.classList.remove('hidden');
 
@@ -344,9 +374,11 @@
             else nextBtn.innerText = 'Next';
         }
 
-        function generateSummary() {
-            const data = {
-                business_name: document.getElementById('business-name').value || 'N/A',
+        function getCompiledData() {
+            return {
+                client_name: document.getElementById('client-name').value,
+                client_email: document.getElementById('client-email').value,
+                business_name: document.getElementById('business-name').value,
                 business_type: document.getElementById('business-type').value || 'N/A',
                 goals: [
                     answers.goal_website ? "Website" : null,
@@ -371,8 +403,12 @@
                 },
                 assets_available: answers.assets || []
             };
+        }
 
-            const summaryText = `### CLIENT INTAKE DATA ###\n\n` +
+        function generateSummary() {
+            const data = getCompiledData();
+            const summaryText = `### NEW CLIENT: ${data.client_name} ###\n` +
+                `EMAIL: ${data.client_email}\n` +
                 `BUSINESS: ${data.business_name} (${data.business_type})\n` +
                 `GOALS: ${data.goals.join(', ')}\n\n` +
                 (data.goals.includes('Website') ? `WEBSITE NEEDS:\n- Type: ${data.website.type}\n- Features: ${data.website.features.join(', ') || 'None'}\n\n` : '') +
@@ -381,24 +417,54 @@
                 `BRAND VIBE: ${data.brand.styles.join(', ') || 'General'}\n` +
                 `NOTES: ${data.brand.notes}\n\n` +
                 `ASSETS PROVIDED: ${data.assets_available.join(', ') || 'None'}\n\n` +
-                `### AI INSTRUCTION ###\n` +
-                `Based on this data, please generate a full project roadmap including a sitemap, content plan, and ad campaign strategy.`;
+                `### AI PROJECT GENERATION PROMPT ###\n` +
+                `You are an expert agency project manager. Based on this data, generate a full project roadmap, a sitemap, and a 30-day content calendar for ${data.business_name}.`;
 
             document.getElementById('final-summary').innerText = summaryText;
+            return summaryText;
+        }
+
+        async function submitProject() {
+            const btn = document.getElementById('submit-btn');
+            const data = getCompiledData();
+            const prompt = generateSummary();
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+            if (WEBHOOK_URL === 'YOUR_WEBHOOK_URL_HERE') {
+                const mailtoLink = `mailto:${MY_EMAIL}?subject=New Project Request: ${data.business_name}&body=${encodeURIComponent(prompt)}`;
+                window.location.href = mailtoLink;
+                goToStep(9);
+                return;
+            }
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...data, ai_prompt: prompt })
+                });
+
+                if (response.ok) {
+                    goToStep(9);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                alert("Submit failed, but you can still send it via email!");
+                const mailtoLink = `mailto:${MY_EMAIL}?subject=New Project Request: ${data.business_name}&body=${encodeURIComponent(prompt)}`;
+                window.location.href = mailtoLink;
+                goToStep(9);
+            }
         }
 
         function copyToClipboard() {
             const text = document.getElementById('final-summary').innerText;
             navigator.clipboard.writeText(text).then(() => {
                 const btn = document.getElementById('copy-btn');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                btn.classList.replace('bg-blue-600', 'bg-green-600');
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.classList.replace('bg-green-600', 'bg-blue-600');
-                }, 2000);
+                btn.innerText = '✓ Data Copied!';
+                setTimeout(() => btn.innerText = 'Or copy data to clipboard instead', 2000);
             });
         }
     </script>

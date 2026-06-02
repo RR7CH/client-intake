@@ -229,10 +229,10 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Platforms Needed</label>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-facebook text-blue-600"></i> Facebook</button>
-                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-instagram text-pink-600"></i> Instagram</button>
-                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-tiktok"></i> TikTok</button>
-                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-youtube text-red-600"></i> YouTube</button>
+                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-facebook text-blue-600"></i> <span>Facebook</span></button>
+                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-instagram text-pink-600"></i> <span>Instagram</span></button>
+                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-tiktok"></i> <span>TikTok</span></button>
+                            <button type="button" onclick="toggleSelection(this, 'social-platform')" class="p-3 border rounded-lg flex items-center justify-center gap-2 hover:border-blue-500"><i class="fa-brands fa-youtube text-red-600"></i> <span>YouTube</span></button>
                         </div>
                     </div>
                     <div>
@@ -437,7 +437,7 @@
 
         function toggleSelection(el, category) {
             el.classList.toggle('card-selected');
-            const text = el.innerText.trim();
+            const text = (el.querySelector('span') ? el.querySelector('span').innerText : el.innerText).trim();
             const keyMap = {
                 'goal': 'goals',
                 'web-page': 'webPages',
@@ -463,51 +463,56 @@
             answers[category] = el.innerText.trim();
         }
 
+        function getGoalFlags() {
+            return {
+                hasWebsiteGoal: answers.goals.some(g => g.toLowerCase().includes('website')),
+                hasSocialGoal: answers.goals.some(g => g.toLowerCase().includes('social')),
+                hasAdsGoal: answers.goals.some(g => g.toLowerCase().includes('ads'))
+            };
+        }
+
+        function resolveNextStep(from) {
+            const { hasWebsiteGoal, hasSocialGoal, hasAdsGoal } = getGoalFlags();
+            let n = from + 1;
+            while (
+                (n === 6 && !hasWebsiteGoal) ||
+                (n === 7 && !hasSocialGoal) ||
+                (n === 8 && !hasAdsGoal)
+            ) { n++; }
+            return n;
+        }
+
+        function resolvePrevStep(from) {
+            const { hasWebsiteGoal, hasSocialGoal, hasAdsGoal } = getGoalFlags();
+            let n = from - 1;
+            while (
+                (n === 6 && !hasWebsiteGoal) ||
+                (n === 7 && !hasSocialGoal) ||
+                (n === 8 && !hasAdsGoal)
+            ) { n--; }
+            return n;
+        }
+
         function nextStep() {
             if (currentStep === 1) {
                 const bName = document.getElementById('business-name').value;
                 const cEmail = document.getElementById('client-email').value;
                 if (!bName || !cEmail) {
-                    alert("Business name and email are required."); 
+                    alert("Business name and email are required.");
                     return;
                 }
             }
 
-            let nextNum = currentStep + 1;
-            
-            // Branching logic: skip specific steps if goals aren't selected
-            const hasWebsiteGoal = answers.goals.some(g => g.toLowerCase().includes('website'));
-            const hasSocialGoal = answers.goals.some(g => g.toLowerCase().includes('social'));
-            const hasAdsGoal = answers.goals.some(g => g.toLowerCase().includes('ads'));
-
-            if (nextNum === 6 && !hasWebsiteGoal) nextNum++;
-            if (nextNum === 7 && !hasSocialGoal) nextNum++;
-            if (nextNum === 8 && !hasAdsGoal) nextNum++;
-
-            // Handle double skips (e.g., skip 6 and 7 if neither goal selected)
-            if (nextNum === 7 && !hasSocialGoal) nextNum++;
-            if (nextNum === 8 && !hasAdsGoal) nextNum++;
-            if (nextNum === 8 && !hasAdsGoal) nextNum++;
+            const nextNum = resolveNextStep(currentStep);
 
             if (nextNum <= totalSteps) {
+                if (nextNum === totalSteps) generateSummary();
                 goToStep(nextNum);
-            }
-            if (nextNum === 13) {
-                generateSummary();
             }
         }
 
         function prevStep() {
-            let prevNum = currentStep - 1;
-            
-            const hasWebsiteGoal = answers.goals.some(g => g.toLowerCase().includes('website'));
-            const hasSocialGoal = answers.goals.some(g => g.toLowerCase().includes('social'));
-            const hasAdsGoal = answers.goals.some(g => g.toLowerCase().includes('ads'));
-
-            if (prevNum === 8 && !hasAdsGoal) prevNum--;
-            if (prevNum === 7 && !hasSocialGoal) prevNum--;
-            if (prevNum === 6 && !hasWebsiteGoal) prevNum--;
-
+            const prevNum = resolvePrevStep(currentStep);
             if (prevNum >= 1) {
                 goToStep(prevNum);
             }
